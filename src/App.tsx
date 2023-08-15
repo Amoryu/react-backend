@@ -8,8 +8,6 @@ export default function App() {
   const outlet = useRoutes(router)
   return (
     <>
-      顶级组件
-
       <Link to="/home">Home</Link>
       <Link to="/about">About</Link>
       <Link to="/user">User</Link>

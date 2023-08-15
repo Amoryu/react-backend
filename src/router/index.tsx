@@ -1,8 +1,17 @@
-import Home from '../views/Home'
-import About from '../views/About'
-import User from '../views/User'
+// 路由懒加载
+import { lazy, Suspense } from 'react'
+
+const Home = lazy(() => import("../views/Home"))
+const About = lazy(() => import("../views/About"))
+const User = lazy(() => import("../views/User"))
 
 import { Navigate } from 'react-router-dom'
+
+const withLoadingComponent = (component: JSX.Element) => (
+  <Suspense fallback={<div>loading...</div>}>
+      {component}
+    </Suspense>
+)
 
 const routes = [
   {
@@ -11,15 +20,16 @@ const routes = [
   },
   {
     path: "/about",
-    element:<About/>
+    element: withLoadingComponent(<About/>)
   },
   {
     path: "/home",
-    element:<Home/>
+    element: withLoadingComponent(<Home/>)
+
   },
   {
     path: "/user",
-    element:<User/>
+    element: withLoadingComponent(<User/>)
   },
 ]
 

@@ -8,9 +8,16 @@ import '@/assets/styles/global.scss'
 
 import App from './App.tsx'
 
+//路由组件写法
+// import Router from './router/index.tsx'
+
+//路由表写法
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
   </React.StrictMode>
 )

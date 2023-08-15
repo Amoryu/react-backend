@@ -1,18 +1,24 @@
-import Compo1 from "@/components/Compo1"
-import Compo2 from "@/components/Compo2"
-// antd样式
-import "antd/dist/reset.css"
-import { Button } from 'antd'
-import { UpCircleFilled } from "@ant-design/icons"
- 
+
+// import { Outlet,Link } from 'react-router-dom'
+import { useRoutes,Link } from 'react-router-dom'
+
+import router from './router/index'
+
 export default function App() {
+  const outlet = useRoutes(router)
   return (
     <>
       顶级组件
-      <Button type="primary">这是一个按钮</Button>
-      <UpCircleFilled style={ { fontSize:'40px', color: 'red'}}/>
-      <Compo1/>
-      <Compo2/>
+
+      <Link to="/home">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/user">User</Link>
+      
+
+      {/* 占位符组件，类似router-view 
+      <OutLet/> */}
+
+      {outlet}
     </>
   )
 }

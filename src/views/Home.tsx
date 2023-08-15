@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom'
 import {
   DesktopOutlined,
   FileOutlined,
@@ -28,9 +29,9 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
+  getItem('About', '/about', <PieChartOutlined />),
+  getItem('User', '/user', <DesktopOutlined />),
+  getItem('Main', 'sub1', <UserOutlined />, [
     getItem('Tom', '3'),
     getItem('Bill', '4'),
     getItem('Alex', '5'),
@@ -45,26 +46,32 @@ const Home: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const navigateTo = useNavigate()
+  const menuClick = (e) => {
+    // console.log(e.key)
+    navigateTo(e.key)
+  }
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <div className="demo-logo-vertical" >React后台</div>
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={menuClick}/>
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '0 16px' }}>
+        <Header style={{ paddingLeft: '16px', background: colorBgContainer, margin: '0 16px 16px 0' }} >
           <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-            Bill is a cat.
-          </div>
+              <Breadcrumb.Item>User</Breadcrumb.Item>
+              <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            </Breadcrumb>
+        </Header>
+        <Content style={{ margin: '0 16px', height: '100vh' }}>
+          {/* 路由出口 */}
+          <Outlet></Outlet>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center',padding: 0, lineHeight: '48px' }}>Ant Design ©2023 Created by Ant UED</Footer>
       </Layout>
-    </Layout>
+    </Layout> 
   );
 };
 

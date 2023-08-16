@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       </Sider>
       {/* 右侧窗口布局 */}
       <Layout>
-        <Header style={{ paddingLeft: '16px', background: colorBgContainer, margin: '0 16px 16px 0' }} >
+        <Header style={{ paddingLeft: '16px', background: colorBgContainer, margin: '0 0 16px 0' }} >
           <BreadCrumb/>
         </Header>
         <Content style={{ margin: '0 16px', height: '100vh' }}>

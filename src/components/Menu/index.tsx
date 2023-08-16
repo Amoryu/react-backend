@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
 import {  Menu } from 'antd';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import {
   DesktopOutlined,
@@ -25,72 +25,44 @@ const items: MenuItem[] = [
   },
   {
     label: "Main",
-    key: "sub1",
+    key: "sub",
     icon: <UserOutlined />,
     children: [
       {
         label: "main1",
-        key: "1",
+        key: "/sub/compo1",
         icon: <PieChartOutlined />,
       },
       {
         label: "main2",
-        key: "2",
-        icon: <PieChartOutlined />,
-      },
-      {
-        label: "main3",
-        key: "3",
+        key: "/sub/compo2",
         icon: <PieChartOutlined />,
       },
     ]
-  },
-  {
-    label: "Team",
-    key: "/sub2",
-    icon: <TeamOutlined />,
-    children: [
-      {
-        label: "team1",
-        key: "11",
-        icon: <PieChartOutlined />,
-      },
-      {
-        label: "team2",
-        key: "22",
-        icon: <PieChartOutlined />,
-      },
-      {
-        label: "team3",
-        key: "33",
-        icon: <PieChartOutlined />,
-      },
-    ]
-  },
-  {
-    label: "File",
-    key: "333",
-    icon: <DesktopOutlined />,
   },
 ]
 
 const Component: React.FC = () => {
   const navigateTo = useNavigate()
-  const [openKeys, setOpenKeys] = useState(['']);
+  const currentRoute = useLocation()
+  const path = currentRoute.pathname
+  let firstOpenKey = path.split('/')[1]
+  const [openKeys, setOpenKeys] = useState([firstOpenKey]);
 
+  console.log(currentRoute)
   const menuClick = (e:any) => {
     // console.log(e.key)
     navigateTo(e.key)
   }
   const handleOpenChange = (keys:string[]) => {
-    console.log(keys)
+    // console.log(keys)
     // 设置openkeys为最后一个点击的栏目，即keys数组的最后一项
     setOpenKeys(keys.slice(-1))
   }
   return (
     <Menu
       theme="dark"
-      defaultSelectedKeys={['/about']}
+      defaultSelectedKeys={[path]}
       mode="inline" items={items}
       onOpenChange={handleOpenChange}
       openKeys={openKeys}

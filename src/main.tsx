@@ -14,10 +14,19 @@ import App from './App.tsx'
 //路由表写法
 import { BrowserRouter } from 'react-router-dom'
 
+// 引入redux状态管理库
+import { Provider } from 'react-redux'
+import store from './store/index.ts'
+
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+
     <BrowserRouter>
       <App/>
     </BrowserRouter>
-  </React.StrictMode>
+  </Provider>
+  // </React.StrictMode>
+
 )

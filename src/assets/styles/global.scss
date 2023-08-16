@@ -9,3 +9,20 @@ img {
   // 禁止拖放图片
   -webkit-user-drag: none;
 }
+
+.demo-logo-vertical,
+.demo-logo-vertical-collapse 
+{
+  height: 64px;
+  color: #fff;
+  font-size: 30px;
+  line-height: 64px;
+  text-align: center;
+}
+.demo-logo-vertical-collapse {
+  width: 100px;
+}
+
+.demo-logo-vertical {
+  width: 200px;
+}

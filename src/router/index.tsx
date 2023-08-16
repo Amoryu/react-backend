@@ -4,7 +4,7 @@ import { lazy, Suspense } from 'react'
 const Home = lazy(() => import("../views/Home"))
 const About = lazy(() => import("../views/About"))
 const User = lazy(() => import("../views/User"))
-
+const NotFound = lazy(()=> import("@/components/Error/404"))
 
 const withLoadingComponent = (component: JSX.Element) => (
   <Suspense fallback={<div>loading...</div>}>
@@ -25,12 +25,17 @@ const routes = [
         path: "/user",
         element: withLoadingComponent(<User/>)
       },
+      {
+        path: "*",
+        element: <NotFound />,
+      }
     ]
   },
   {
     path: "*",
-    element: <Home />,
+    element: <NotFound />,
   }
+  
 
 ]
 

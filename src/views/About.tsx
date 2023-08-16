@@ -2,7 +2,9 @@ import { useSelector,useDispatch } from "react-redux"
 
 
 export default function About() {
-  const num = useSelector((state:RootState) => state.num)
+  const {num} = useSelector((state: RootState) => ({
+    num:state.handleNum.num
+  }))
   const dispatch = useDispatch()
   const changeNum = () => {
     // dispatch({type:'add1'})

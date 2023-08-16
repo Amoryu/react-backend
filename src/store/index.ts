@@ -1,5 +1,12 @@
-import { legacy_createStore } from 'redux'
+import { legacy_createStore,combineReducers } from 'redux'
 
-import reducer from './reducer'
+import handleNum from './NumStore/reducer'
+import handleArr from './ArrStore/reducer'
 
-export default legacy_createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+// 组合各个模块的reducer
+const reducers = combineReducers({
+  handleNum,
+  handleArr
+})
+
+export default legacy_createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())

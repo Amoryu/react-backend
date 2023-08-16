@@ -7,8 +7,8 @@ export default function About() {
   }))
   const dispatch = useDispatch()
   const changeNum = () => {
-    // dispatch({type:'add1'})
-    dispatch({type:'add2',val: 10})
+    dispatch({type:'add1'})
+    // dispatch({type:'add2',val: 10})
   }
   return (
     <div>

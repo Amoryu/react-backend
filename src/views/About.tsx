@@ -7,7 +7,11 @@ export default function About() {
   }))
   const dispatch = useDispatch()
   const changeNum = () => {
+    setTimeout(() => {
     dispatch({type:'add1'})
+      
+    },1000)
+    // dispatch({type:'add1'})
     // dispatch({type:'add2',val: 10})
   }
   return (

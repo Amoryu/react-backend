@@ -41,5 +41,7 @@
 
 .captchaBox {
     display: flex;
-    margin-left: 20px;
+    .captchaImg {
+        margin-left: 20px;
+    }
 }

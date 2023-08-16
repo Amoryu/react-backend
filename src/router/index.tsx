@@ -42,10 +42,7 @@ const routes = [
       }
     ]
   },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
+
   {
     path: "/login",
     element: withLoadingComponent(<Login />),

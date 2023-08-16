@@ -1,13 +1,14 @@
-import { useEffect,useState } from 'react'
+import { useEffect, useState, ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './login.module.scss'
 import initLoginBg from './init'
-import { Input, Space, Button } from 'antd'
+import { Input, Space, Button,message } from 'antd'
 
-import { CaptchaAPI } from "@/request/api"
+import { CaptchaAPI,LoginAPI } from "@/request/api"
 
 
 export default function index() {
-
+  const naigateTo = useNavigate()
   useEffect(() => {
     initLoginBg()
     getCaptchaImg()
@@ -45,8 +46,32 @@ export default function index() {
     }
   }
 
-  const getLoginInfo = () => {
-    console.log(username,password,captcha)
+  const getLoginInfo = async () => {
+    console.log(username, password, captcha)
+    
+    if (!username.trim() || !password.trim() || !captcha.trim()) {
+      message.warning("请输入完整登录信息")
+      return
+    } 
+    // 发送登录请求
+    let loginRes = await LoginAPI({
+      username,
+      password,
+      code: captcha,
+      uuid: localStorage.getItem('uuid') as string
+    })
+
+    if (loginRes.code === 200) {
+      // 提示成功
+      message.success("登录成功！")
+      // 保存token
+      localStorage.setItem('react_ts_token',loginRes.token)
+      // 跳转首页
+      naigateTo('/about')
+      // 删除uuid
+      localStorage.removeItem('uuid')
+    }
+    
   }
 
   return (
